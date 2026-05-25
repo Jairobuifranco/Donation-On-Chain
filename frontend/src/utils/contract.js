@@ -172,6 +172,31 @@ export function isCampaignOwner(campaign, account) {
   return isSameAddress(account, campaign?.charity);
 }
 
+export function hasCampaignReachedGoal(campaign) {
+  return BigInt(campaign?.totalDonated ?? 0n) >= BigInt(campaign?.fundingGoal ?? 0n);
+}
+
+export function hasCampaignDeadlinePassed(campaign) {
+  return Math.floor(Date.now() / 1000) >= Number(campaign?.deadline ?? 0);
+}
+
+export function canCharitySubmitProof(campaign) {
+  const acceptsProof = [0, 1, 2].includes(Number(campaign?.status));
+  return acceptsProof && (hasCampaignReachedGoal(campaign) || hasCampaignDeadlinePassed(campaign));
+}
+
+export function proofSubmissionMessage(campaign) {
+  if (hasCampaignReachedGoal(campaign)) {
+    return "Campaign goal reached. You can now submit proof.";
+  }
+
+  if (hasCampaignDeadlinePassed(campaign)) {
+    return "Campaign deadline has passed. You can now submit proof.";
+  }
+
+  return "Proof can be submitted once the campaign reaches its goal or the deadline has passed.";
+}
+
 export async function isCurrentWalletVerifier(account, providerOrSigner = getProvider()) {
   if (!account) {
     return false;

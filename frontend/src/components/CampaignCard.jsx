@@ -1,8 +1,10 @@
 import {
+  canCharitySubmitProof,
   formatEth,
   isCampaignOpenForDonations,
   isCampaignOwner,
   formatAddress,
+  proofSubmissionMessage,
   statusBadgeClass,
   statusLabel
 } from "../utils/contract";
@@ -70,7 +72,8 @@ function CampaignCard({
 }) {
   const isCharity = isCampaignOwner(campaign, account);
   const canDonate = variant === "donor" && isCampaignOpenForDonations(campaign);
-  const canSubmitProof = variant === "charity" && isCharity && [0, 1, 2].includes(Number(campaign.status));
+  const canShowProofForm = variant === "charity" && isCharity && [0, 1, 2].includes(Number(campaign.status));
+  const canSubmitProof = canShowProofForm && canCharitySubmitProof(campaign);
   const canVerify = variant === "admin" && isVerifier && Number(campaign.status) === 1;
   const hasEscrowFunds = BigInt(campaign.escrowBalance ?? 0n) > 0n;
   const showProofDetails = variant !== "donor";
@@ -153,8 +156,17 @@ function CampaignCard({
           </div>
         )}
 
-        {canSubmitProof && (
-          <SubmitProofForm campaignId={campaign.id} onSubmitProof={onSubmitProof} disabled={isBusy} />
+        {canShowProofForm && (
+          <>
+            <div className={`alert ${canSubmitProof ? "alert-success" : "alert-warning"} py-2 mt-3 mb-0`}>
+              {proofSubmissionMessage(campaign)}
+            </div>
+            <SubmitProofForm
+              campaignId={campaign.id}
+              onSubmitProof={onSubmitProof}
+              disabled={isBusy || !canSubmitProof}
+            />
+          </>
         )}
 
         {variant === "charity" && !isCharity && (

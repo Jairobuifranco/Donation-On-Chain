@@ -5,6 +5,7 @@ import CreateCampaignForm from "./components/CreateCampaignForm";
 import {
   DEPLOYMENT_CHAIN_ID,
   STATUS_LABELS,
+  canCharitySubmitProof,
   connectWallet as connectWalletWithMetaMask,
   formatEth,
   formatAddress,
@@ -18,6 +19,7 @@ import {
   isCurrentWalletVerifier,
   normalizeCampaign,
   parseEth,
+  proofSubmissionMessage,
   requestWalletAccountChange,
   requireWalletConnection,
   statusBadgeClass,
@@ -348,6 +350,11 @@ function App() {
 
     if (!campaign || !isCampaignOwner(campaign, snapshot.account)) {
       setError("Only the campaign charity can submit proof for this campaign.");
+      return;
+    }
+
+    if (!canCharitySubmitProof(campaign)) {
+      setError(proofSubmissionMessage(campaign));
       return;
     }
 
