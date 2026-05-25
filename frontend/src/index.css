@@ -1,0 +1,44 @@
+body {
+  background: #f5f7fb;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.page-header {
+  border-bottom: 1px solid #d9e0ec;
+  background: #ffffff;
+}
+
+.campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.campaign-card {
+  border: 1px solid #d9e0ec;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.proof-link {
+  word-break: break-word;
+}
+
+.form-hint {
+  color: #5f6f89;
+  font-size: 0.875rem;
+}
+
+.status-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
