@@ -1,0 +1,245 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "campaignContract",
+						"type": "address"
+					}
+				],
+				"name": "CampaignContractUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "FundsDeposited",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "charity",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "FundsReleased",
+				"type": "event"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [],
+				"name": "admin",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "depositFunds",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCampaignContractAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "getEscrowBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "isReleased",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "charity",
+						"type": "address"
+					}
+				],
+				"name": "releaseFunds",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_campaignContract",
+						"type": "address"
+					}
+				],
+				"name": "setCampaignContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"details": "Holds donated ETH for donation campaigns until the campaign management contract tells it to release funds after proof approval. This contract only manages money. It does not store campaign descriptions, proof details, verifier decisions, or donor records.",
+			"kind": "dev",
+			"methods": {
+				"depositFunds(uint256)": {
+					"details": "Deposits ETH into escrow for a specific campaign. Only the trusted CampaignManagementContract can call this function."
+				},
+				"getCampaignContractAddress()": {
+					"details": "Returns the trusted CampaignManagementContract address."
+				},
+				"getEscrowBalance(uint256)": {
+					"details": "Returns the ETH currently held for a campaign."
+				},
+				"isReleased(uint256)": {
+					"details": "Returns whether funds for a campaign have already been released."
+				},
+				"releaseFunds(uint256,address)": {
+					"details": "Releases all escrowed ETH for a campaign to the charity address. Uses checks-effects-interactions to prevent re-entrancy issues."
+				},
+				"setCampaignContract(address)": {
+					"details": "Sets the trusted CampaignManagementContract address. Only the escrow admin can set or update this address."
+				}
+			},
+			"title": "MilestoneEscrowContract",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"MilestoneEscrowContract.sol": "MilestoneEscrowContract"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"MilestoneEscrowContract.sol": {
+			"keccak256": "0x796492d7bddf91e9ab3b4b50344b85b6e41774aa0400174772fe834355f7f9b6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://caf9ae9ac03028c019981d9a937c254308f7ef2ec2ba76e3e8a652f9c8910653",
+				"dweb:/ipfs/QmRA1AjpJcwUGrbjiJYezpFsEJBkkMu1RXBLbQ3rWxmFL6"
+			]
+		}
+	},
+	"version": 1
+}

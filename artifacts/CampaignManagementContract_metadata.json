@@ -1,0 +1,693 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_escrowContract",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "charity",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "fundingGoal",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "CampaignCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "donor",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "DonationReceived",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "escrowContract",
+						"type": "address"
+					}
+				],
+				"name": "EscrowContractUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "charity",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "FundsReleased",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "verifier",
+						"type": "address"
+					}
+				],
+				"name": "ProofApproved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "verifier",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "reason",
+						"type": "string"
+					}
+				],
+				"name": "ProofRejected",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "proofURI",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "submissionNumber",
+						"type": "uint256"
+					}
+				],
+				"name": "ProofSubmitted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "verifier",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					}
+				],
+				"name": "VerifierUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "admin",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "approveProof",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "canApproveProof",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "charity",
+						"type": "address"
+					}
+				],
+				"name": "canSubmitProof",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fundingGoal",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "charity",
+						"type": "address"
+					}
+				],
+				"name": "createCampaign",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "donate",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "escrowContract",
+				"outputs": [
+					{
+						"internalType": "contract MilestoneEscrowContract",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCampaign",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "charity",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "fundingGoal",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalDonated",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "deadline",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum CampaignManagementContract.CampaignStatus",
+								"name": "status",
+								"type": "uint8"
+							},
+							{
+								"internalType": "string",
+								"name": "latestProofURI",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "proofSubmissionCount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "latestRejectionReason",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct CampaignManagementContract.Campaign",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCampaignCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "donor",
+						"type": "address"
+					}
+				],
+				"name": "getDonation",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getEscrowAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "getEscrowBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					}
+				],
+				"name": "getLatestProof",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isVerifier",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "reason",
+						"type": "string"
+					}
+				],
+				"name": "rejectProof",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_escrowContract",
+						"type": "address"
+					}
+				],
+				"name": "setEscrowContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "verifier",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					}
+				],
+				"name": "setVerifier",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "campaignId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "proofURI",
+						"type": "string"
+					}
+				],
+				"name": "submitProof",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Manages donation campaigns, donor contribution records, milestone proof submissions, and verifier approval or rejection decisions. Donated ETH is not stored in this contract. Every donation is immediately forwarded to MilestoneEscrowContract, where it stays locked until a verifier approves the latest submitted proof. There is intentionally no refund functionality. Donors cannot withdraw.",
+			"kind": "dev",
+			"methods": {
+				"approveProof(uint256)": {
+					"details": "Approves the latest submitted proof and releases escrowed funds. Only verifier/admin addresses can approve proof."
+				},
+				"canApproveProof(uint256)": {
+					"details": "Returns whether a campaign currently has submitted proof that can be approved."
+				},
+				"canSubmitProof(uint256,address)": {
+					"details": "Returns whether a charity address can submit proof for a campaign now."
+				},
+				"createCampaign(string,string,uint256,uint256,address)": {
+					"details": "Creates a new donation campaign. The charity wallet is the only address allowed to submit proof later."
+				},
+				"donate(uint256)": {
+					"details": "Accepts a donation and immediately forwards the ETH to escrow. Donations are allowed while the campaign is active or while proof is being reviewed or resubmitted, but never after funds have been released."
+				},
+				"getCampaign(uint256)": {
+					"details": "Returns the full campaign data for Remix testing."
+				},
+				"getCampaignCount()": {
+					"details": "Returns the total number of campaigns created."
+				},
+				"getDonation(uint256,address)": {
+					"details": "Returns how much a donor has contributed to a campaign."
+				},
+				"getEscrowAddress()": {
+					"details": "Returns the configured escrow contract address."
+				},
+				"getEscrowBalance(uint256)": {
+					"details": "Returns the escrow balance for a campaign."
+				},
+				"getLatestProof(uint256)": {
+					"details": "Returns the latest proof URI submitted for a campaign."
+				},
+				"isVerifier(address)": {
+					"details": "Returns whether an address is an approved verifier."
+				},
+				"rejectProof(uint256,string)": {
+					"details": "Rejects the latest submitted proof. Funds remain locked in escrow and the charity can submit new proof later."
+				},
+				"setEscrowContract(address)": {
+					"details": "Updates the escrow contract address if a new escrow contract is deployed."
+				},
+				"setVerifier(address,bool)": {
+					"details": "Adds or removes a verifier address. The admin is a verifier by default."
+				},
+				"submitProof(uint256,string)": {
+					"details": "Allows the campaign charity to submit milestone proof. If proof was rejected before, the charity can submit a new proof URI."
+				}
+			},
+			"title": "CampaignManagementContract",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"CampaignManagementContract.sol": "CampaignManagementContract"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"CampaignManagementContract.sol": {
+			"keccak256": "0xe09764c7896d03eedff972f6cc49091bfdb1b945a26be9ca58bf421f7c31f506",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://242568e29930e8248c9dc4d7cc184c8f122a93630313462273e2d9fa65ebeb10",
+				"dweb:/ipfs/QmfQYSvw1GMgh31245w5qgahrKZP1VteK91M61nRjgAa4E"
+			]
+		},
+		"MilestoneEscrowContract.sol": {
+			"keccak256": "0x796492d7bddf91e9ab3b4b50344b85b6e41774aa0400174772fe834355f7f9b6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://caf9ae9ac03028c019981d9a937c254308f7ef2ec2ba76e3e8a652f9c8910653",
+				"dweb:/ipfs/QmRA1AjpJcwUGrbjiJYezpFsEJBkkMu1RXBLbQ3rWxmFL6"
+			]
+		}
+	},
+	"version": 1
+}
