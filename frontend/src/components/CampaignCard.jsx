@@ -14,18 +14,29 @@ import VerifierActions from "./VerifierActions";
 
 function renderProof(proofURI) {
   if (!proofURI) {
-    return <span className="text-secondary">No proof submitted yet</span>;
+    return (
+      <span className="text-secondary">
+        <i className="bi bi-file-earmark me-1" aria-hidden="true"></i>
+        No proof submitted yet
+      </span>
+    );
   }
 
   if (proofURI.startsWith("http://") || proofURI.startsWith("https://")) {
     return (
       <a className="proof-link" href={proofURI} target="_blank" rel="noreferrer">
+        <i className="bi bi-box-arrow-up-right me-1" aria-hidden="true"></i>
         {proofURI}
       </a>
     );
   }
 
-  return <span className="proof-link mono">{proofURI}</span>;
+  return (
+    <span className="proof-link mono">
+      <i className="bi bi-link-45deg me-1" aria-hidden="true"></i>
+      {proofURI}
+    </span>
+  );
 }
 
 function getFundingProgress(campaign) {
@@ -88,40 +99,47 @@ function CampaignCard({
       <div className="card-body">
         <div className="d-flex justify-content-between gap-3 align-items-start mb-2">
           <div>
-            <h3 className="h5 mb-1">{campaign.title}</h3>
-            <div className="text-secondary">Campaign #{campaign.id}</div>
+            <h3 className="h5 mb-1">
+              <i className="bi bi-megaphone text-primary me-2" aria-hidden="true"></i>
+              {campaign.title}
+            </h3>
+            <div className="text-secondary small">Campaign #{campaign.id}</div>
           </div>
           <span className={`badge ${statusBadgeClass(campaign.status)}`}>
+            <i className="bi bi-circle-fill me-1 status-dot" aria-hidden="true"></i>
             {statusLabel(campaign.status)}
           </span>
         </div>
 
-        <p className="mb-3">{campaign.description}</p>
+        <p className="campaign-description mb-3">{campaign.description}</p>
 
         <div className="mb-3">
           <div className="d-flex justify-content-between gap-2 mb-1">
-            <span className="small text-secondary">Funding progress</span>
+            <span className="small text-secondary">
+              <i className="bi bi-graph-up-arrow me-1" aria-hidden="true"></i>
+              Funding progress
+            </span>
             <span className="small fw-semibold">{fundingProgress.toFixed(1)}%</span>
           </div>
-          <div className="progress" role="progressbar" aria-label="Funding progress" aria-valuenow={fundingProgress} aria-valuemin="0" aria-valuemax="100">
-            <div className="progress-bar" style={{ width: `${fundingProgress}%` }} />
+          <div className="progress funding-progress" role="progressbar" aria-label="Funding progress" aria-valuenow={fundingProgress} aria-valuemin="0" aria-valuemax="100">
+            <div className="progress-bar bg-success" style={{ width: `${fundingProgress}%` }} />
           </div>
         </div>
 
         <dl className="row mb-0">
-          <dt className="col-5">Charity</dt>
+          <dt className="col-5"><i className="bi bi-building-fill me-1 text-primary" aria-hidden="true"></i>Charity</dt>
           <dd className="col-7 mono">{formatAddress(campaign.charity)}</dd>
 
-          <dt className="col-5">Funding Goal</dt>
+          <dt className="col-5"><i className="bi bi-bullseye me-1 text-success" aria-hidden="true"></i>Funding Goal</dt>
           <dd className="col-7">{formatEth(campaign.fundingGoal)} ETH</dd>
 
-          <dt className="col-5">Total Donated</dt>
+          <dt className="col-5"><i className="bi bi-cash-coin me-1 text-success" aria-hidden="true"></i>Total Donated</dt>
           <dd className="col-7">{formatEth(campaign.totalDonated)} ETH</dd>
 
-          <dt className="col-5">Escrow Balance</dt>
+          <dt className="col-5"><i className="bi bi-safe2 me-1 text-primary" aria-hidden="true"></i>Escrow Balance</dt>
           <dd className="col-7 fw-semibold">{formatEth(campaign.escrowBalance)} ETH</dd>
 
-          <dt className="col-5">Deadline</dt>
+          <dt className="col-5"><i className="bi bi-calendar-event me-1 text-warning" aria-hidden="true"></i>Deadline</dt>
           <dd className="col-7">
             <div>{deadlineDate}</div>
             <span className={`badge ${deadlineState.badgeClass}`}>{deadlineState.label}</span>
@@ -129,14 +147,14 @@ function CampaignCard({
 
           {showProofDetails && (
             <>
-              <dt className="col-5">Proof Count</dt>
+              <dt className="col-5"><i className="bi bi-file-earmark-check me-1 text-warning" aria-hidden="true"></i>Proof Count</dt>
               <dd className="col-7">{campaign.proofSubmissionCount}</dd>
             </>
           )}
         </dl>
 
         {showProofDetails && (
-          <div className="mt-3">
+          <div className="proof-box mt-3">
             <div className="fw-semibold mb-1">{showAdminDetails ? "Proof URI / Hash" : "Latest Proof"}</div>
             {renderProof(campaign.latestProofURI)}
           </div>

@@ -12,9 +12,13 @@ function SubmitProofForm({ campaignId, onSubmitProof, disabled }) {
   return (
     <form className="mt-3" onSubmit={handleSubmit}>
       <label className="form-label" htmlFor={`proof-${campaignId}`}>
+        <i className="bi bi-file-earmark-check text-warning me-1" aria-hidden="true"></i>
         Submit Proof URI
       </label>
       <div className="input-group">
+        <span className="input-group-text">
+          <i className="bi bi-link-45deg" aria-hidden="true"></i>
+        </span>
         <input
           id={`proof-${campaignId}`}
           className="form-control"
@@ -24,7 +28,8 @@ function SubmitProofForm({ campaignId, onSubmitProof, disabled }) {
           disabled={disabled}
           required
         />
-        <button className="btn btn-outline-secondary" type="submit" disabled={disabled}>
+        <button className="btn btn-warning" type="submit" disabled={disabled}>
+          <i className="bi bi-upload me-1" aria-hidden="true"></i>
           Submit
         </button>
       </div>

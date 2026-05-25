@@ -41,10 +41,13 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
   }
 
   return (
-    <section className="bg-white border rounded-2 p-3 mb-4">
+    <section className="form-panel mb-4">
       <div className="d-flex justify-content-between align-items-start gap-3 mb-3">
         <div>
-          <h2 className="h5 mb-1">Create Campaign</h2>
+          <h2 className="h5 mb-1">
+            <i className="bi bi-megaphone text-primary me-2" aria-hidden="true"></i>
+            Create Campaign
+          </h2>
           <p className="form-hint mb-0">Use the connected charity wallet as the campaign charity.</p>
         </div>
       </div>
@@ -53,6 +56,7 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
         <div className="row g-3">
           <div className="col-md-6">
             <label className="form-label" htmlFor="campaign-title">
+              <i className="bi bi-card-heading me-1" aria-hidden="true"></i>
               Title
             </label>
             <input
@@ -68,6 +72,7 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
 
           <div className="col-md-6">
             <label className="form-label" htmlFor="funding-goal">
+              <i className="bi bi-cash-coin me-1" aria-hidden="true"></i>
               Funding Goal in ETH
             </label>
             <input
@@ -85,6 +90,7 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
 
           <div className="col-12">
             <label className="form-label" htmlFor="campaign-description">
+              <i className="bi bi-text-paragraph me-1" aria-hidden="true"></i>
               Description
             </label>
             <textarea
@@ -101,6 +107,7 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
 
           <div className="col-md-6">
             <label className="form-label" htmlFor="campaign-deadline">
+              <i className="bi bi-calendar-event me-1" aria-hidden="true"></i>
               Deadline
             </label>
             <input
@@ -116,6 +123,7 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
 
           <div className="col-md-6">
             <label className="form-label" htmlFor="charity-address">
+              <i className="bi bi-wallet2 me-1" aria-hidden="true"></i>
               Charity Wallet
             </label>
             <input
@@ -131,7 +139,8 @@ function CreateCampaignForm({ account, onCreateCampaign, disabled }) {
           </div>
         </div>
 
-        <button className="btn btn-success mt-3" type="submit" disabled={disabled || !account}>
+        <button className="btn btn-primary mt-3" type="submit" disabled={disabled || !account}>
+          <i className="bi bi-building-fill me-2" aria-hidden="true"></i>
           Create Campaign
         </button>
       </form>

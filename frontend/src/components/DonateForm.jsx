@@ -12,9 +12,13 @@ function DonateForm({ campaignId, onDonate, disabled }) {
   return (
     <form className="mt-3" onSubmit={handleSubmit}>
       <label className="form-label" htmlFor={`donation-${campaignId}`}>
+        <i className="bi bi-heart-fill text-success me-1" aria-hidden="true"></i>
         Donate ETH
       </label>
       <div className="input-group">
+        <span className="input-group-text">
+          <i className="bi bi-cash-coin" aria-hidden="true"></i>
+        </span>
         <input
           id={`donation-${campaignId}`}
           className="form-control"
@@ -27,7 +31,8 @@ function DonateForm({ campaignId, onDonate, disabled }) {
           required
         />
         <span className="input-group-text">ETH</span>
-        <button className="btn btn-primary" type="submit" disabled={disabled}>
+        <button className="btn btn-success" type="submit" disabled={disabled}>
+          <i className="bi bi-send-fill me-1" aria-hidden="true"></i>
           Donate
         </button>
       </div>

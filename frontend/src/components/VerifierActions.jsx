@@ -10,15 +10,19 @@ function VerifierActions({ campaignId, onApproveProof, onRejectProof, disabled, 
   }
 
   return (
-    <div className="mt-3 border-top pt-3">
+    <div className="verifier-panel mt-3">
       <div className="d-flex flex-wrap gap-2 align-items-center mb-3">
-        <span className="fw-semibold">Verifier Actions</span>
+        <span className="fw-semibold">
+          <i className="bi bi-shield-check text-primary me-1" aria-hidden="true"></i>
+          Verifier Actions
+        </span>
         <button
           className="btn btn-success btn-sm"
           type="button"
           onClick={() => onApproveProof(campaignId)}
           disabled={disabled || !canApprove}
         >
+          <i className="bi bi-check-circle me-1" aria-hidden="true"></i>
           Approve Proof
         </button>
       </div>
@@ -31,6 +35,7 @@ function VerifierActions({ campaignId, onApproveProof, onRejectProof, disabled, 
 
       <form onSubmit={handleReject}>
         <label className="form-label" htmlFor={`reject-${campaignId}`}>
+          <i className="bi bi-x-circle text-danger me-1" aria-hidden="true"></i>
           Rejection Reason
         </label>
         <div className="input-group">
@@ -43,7 +48,8 @@ function VerifierActions({ campaignId, onApproveProof, onRejectProof, disabled, 
             disabled={disabled}
             required
           />
-          <button className="btn btn-outline-danger" type="submit" disabled={disabled}>
+          <button className="btn btn-danger" type="submit" disabled={disabled}>
+            <i className="bi bi-x-lg me-1" aria-hidden="true"></i>
             Reject Proof
           </button>
         </div>

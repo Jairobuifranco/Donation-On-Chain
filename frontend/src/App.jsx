@@ -460,35 +460,78 @@ function App() {
 
   function renderUserLanding() {
     return (
-      <section className="row g-4">
-        <div className="col-md-6">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body p-4">
-              <h2 className="h4">Donate</h2>
-              <p className="text-secondary">
-                Support active donation campaigns and track their progress transparently.
-              </p>
-              <button className="btn btn-primary btn-lg" type="button" onClick={() => handleUserChoice("donor")}>
-                Donate
-              </button>
+      <>
+        <section className="row g-4">
+          <div className="col-md-6">
+            <div className="card action-card h-100">
+              <div className="card-body p-4">
+                <div className="feature-icon bg-success-subtle text-success mb-3">
+                  <i className="bi bi-cash-coin" aria-hidden="true"></i>
+                </div>
+                <h2 className="h4">Donate</h2>
+                <p className="text-secondary">
+                  Support active donation campaigns and track their progress transparently.
+                </p>
+                <button className="btn btn-success btn-lg" type="button" onClick={() => handleUserChoice("donor")}>
+                  <i className="bi bi-heart-fill me-2" aria-hidden="true"></i>
+                  Donate
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="col-md-6">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body p-4">
-              <h2 className="h4">Create a Charity</h2>
-              <p className="text-secondary">
-                Create a donation campaign and submit proof of impact.
-              </p>
-              <button className="btn btn-success btn-lg" type="button" onClick={() => handleUserChoice("charity")}>
-                Create a Charity
-              </button>
+          <div className="col-md-6">
+            <div className="card action-card h-100">
+              <div className="card-body p-4">
+                <div className="feature-icon bg-primary-subtle text-primary mb-3">
+                  <i className="bi bi-building-fill" aria-hidden="true"></i>
+                </div>
+                <h2 className="h4">Create a Charity</h2>
+                <p className="text-secondary">
+                  Create a donation campaign and submit proof of impact.
+                </p>
+                <button className="btn btn-primary btn-lg" type="button" onClick={() => handleUserChoice("charity")}>
+                  <i className="bi bi-megaphone me-2" aria-hidden="true"></i>
+                  Create a Charity
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section className="how-it-works mt-4">
+          <div className="d-flex align-items-center gap-2 mb-3">
+            <i className="bi bi-diagram-3 text-primary" aria-hidden="true"></i>
+            <h2 className="h5 mb-0">How it works</h2>
+          </div>
+          <div className="row g-3">
+            <div className="col-md-4">
+              <div className="step-card">
+                <span className="step-number">1</span>
+                <i className="bi bi-heart-fill text-success" aria-hidden="true"></i>
+                <h3 className="h6 mb-1">Donors fund campaigns</h3>
+                <p className="small text-secondary mb-0">Support campaigns with ETH through the connected wallet.</p>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="step-card">
+                <span className="step-number">2</span>
+                <i className="bi bi-file-earmark-check text-warning" aria-hidden="true"></i>
+                <h3 className="h6 mb-1">Charities submit proof</h3>
+                <p className="small text-secondary mb-0">Provide an impact URI or document reference for review.</p>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="step-card">
+                <span className="step-number">3</span>
+                <i className="bi bi-patch-check text-primary" aria-hidden="true"></i>
+                <h3 className="h6 mb-1">Verifiers approve release</h3>
+                <p className="small text-secondary mb-0">Authorised verifiers approve or reject submitted proof.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
     );
   }
 
@@ -496,13 +539,17 @@ function App() {
     return (
       <section className="row justify-content-center">
         <div className="col-lg-7">
-          <div className="card border-0 shadow-sm text-center">
+          <div className="card action-card text-center">
             <div className="card-body p-5">
+              <div className="feature-icon bg-dark text-white mx-auto mb-3">
+                <i className="bi bi-shield-check" aria-hidden="true"></i>
+              </div>
               <h2 className="h4">Admin Verification</h2>
-              <p className="text-secondary mb-4">
+              <p className="text-secondary">
                 Review submitted charity proof and approve or reject fund release.
               </p>
               <button className="btn btn-dark btn-lg px-5" type="button" onClick={handleStartAdminVerification}>
+                <i className="bi bi-patch-check me-2" aria-hidden="true"></i>
                 Verify
               </button>
             </div>
@@ -546,11 +593,12 @@ function App() {
             </div>
           </div>
           <button
-            className="btn btn-outline-secondary btn-sm"
+            className="btn btn-outline-primary btn-sm"
             type="button"
             onClick={loadCampaigns}
             disabled={!isSupportedNetwork || isLoading}
           >
+            <i className={`bi ${isLoading ? "bi-arrow-repeat" : "bi-arrow-clockwise"} me-1`} aria-hidden="true"></i>
             {isLoading ? "Refreshing..." : "Refresh"}
           </button>
         </div>
@@ -705,28 +753,49 @@ function App() {
       />
 
       <header className="page-header">
-        <div className="container py-4">
-          <div className="row align-items-center g-3">
-            <div className="col">
-              <h1 className="h3 mb-2">Donation on Chain</h1>
-              <p className="mb-0 text-secondary">
+        <div className="container py-5">
+          <div className="row align-items-center g-4">
+            <div className="col-lg-8">
+              <div className="hero-kicker mb-3">
+                <i className="bi bi-boxes me-2" aria-hidden="true"></i>
+                Transparent blockchain donations
+              </div>
+              <h1 className="display-5 fw-bold mb-3">Donation on Chain</h1>
+              <p className="lead mb-0">
                 A blockchain donation accountability app where donors fund campaigns, charities submit impact proof, and authorised verifiers approve fund release from escrow.
               </p>
+            </div>
+            <div className="col-lg-4">
+              <div className="hero-stat-card">
+                <div className="d-flex align-items-center gap-3">
+                  <div className="feature-icon bg-success text-white">
+                    <i className="bi bi-shield-check" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <div className="small text-white-50">Prototype flow</div>
+                    <div className="fw-semibold">Donate. Prove. Verify.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
       <main className="container py-4">
-        <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <div className="workflow-bar d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
           <nav aria-label="Current workflow">
-            <span className="text-secondary">{activeMode === "admin" ? "Admin" : "User"}</span>
+            <span className="text-secondary">
+              <i className={`bi ${activeMode === "admin" ? "bi-shield-check" : "bi-person-circle"} me-1`} aria-hidden="true"></i>
+              {activeMode === "admin" ? "Admin" : "User"}
+            </span>
             <span className="text-secondary mx-2">/</span>
             <span className="fw-semibold">{pageTitle}</span>
           </nav>
 
           {!["userLanding", "adminLanding"].includes(activePage) && (
             <button className="btn btn-outline-secondary btn-sm" type="button" onClick={handleBackToLanding}>
+              <i className="bi bi-arrow-left me-1" aria-hidden="true"></i>
               Back
             </button>
           )}
@@ -764,8 +833,11 @@ function App() {
         {renderCurrentPage()}
 
         {sortedCampaigns.length > 0 && activePage === "donor" && (
-          <section className="mt-4 bg-white border rounded-2 p-3">
-            <h2 className="h5">Escrow Summary</h2>
+          <section className="summary-panel mt-4">
+            <h2 className="h5 mb-3">
+              <i className="bi bi-safe2 me-2 text-primary" aria-hidden="true"></i>
+              Escrow Summary
+            </h2>
             <div className="table-responsive">
               <table className="table table-sm align-middle mb-0">
                 <thead>
