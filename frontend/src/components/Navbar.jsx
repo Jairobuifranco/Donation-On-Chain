@@ -19,7 +19,16 @@ function Navbar({
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <span className="navbar-brand fw-semibold">Donation on Chain</span>
+        <span className="navbar-brand fw-semibold d-inline-flex align-items-center gap-2">
+          <img
+            src={`${import.meta.env.BASE_URL}coin-icon.svg`}
+            alt=""
+            width="28"
+            height="28"
+            aria-hidden="true"
+          />
+          Donation on Chain
+        </span>
 
         <div className="btn-group ms-lg-3 my-2 my-lg-0" role="group" aria-label="Select portal">
           <button
