@@ -1,13 +1,34 @@
 # Donation on Chain
 
-Donation on Chain is a university blockchain prototype for donation accountability.
+Donation on Chain is a university blockchain prototype for donation accountability. The application lets charities create donation campaigns, lets donors contribute ETH, and uses a milestone escrow process so funds are only released after submitted proof is reviewed and approved by a verifier/admin.
 
-The prototype uses two Solidity smart contracts:
+The public version of the application is deployed at:
 
-- `CampaignManagementContract.sol`: manages campaigns, donations, donor records, proof submission, verifier decisions, and campaign status.
-- `MilestoneEscrowContract.sol`: securely holds donated ETH and releases funds only after proof is approved.
+https://jairobuifranco.github.io/Donation-On-Chain/
 
-There is no refund functionality. Once donors donate, ETH stays locked in escrow until a verifier/admin approves the submitted proof.
+To use the deployed application, connect MetaMask to the Sepolia test network and use Sepolia test ETH.
+
+This project was developed for IFB452 by Group 44. The development work for the whole project was divided equally between my partner and I.
+
+## Tech Stack
+
+- **Smart contracts**: Solidity.
+- **Backend/application logic**: JavaScript.
+- **Frontend**: React/Vite with Bootstrap.
+- **File storage**: IPFS for storing uploaded proof files.
+- **Blockchain deployment and testing**: Remix and the Sepolia test network.
+- **Public deployment**: GitHub Pages.
+
+## Stakeholders
+
+- **Charity**: creates donation campaigns and submits proof showing how the donated funds will be used.
+- **Donor**: views campaigns and contributes ETH to campaigns they want to support.
+- **Admin/Verifier**: reviews submitted proof, approves or rejects it, and triggers the release of escrowed funds when proof is approved.
+
+## Smart contracts
+
+- **CampaignManagementContract.sol**: manages campaigns, donations, donor records, proof submission, verifier decisions, and campaign status.
+- **MilestoneEscrowContract.sol**: securely holds donated ETH and releases funds only after proof is approved.
 
 ## Contracts
 
@@ -51,7 +72,27 @@ Remix shows enum values as numbers:
 
 If a campaign has status `4`, it is complete and no more donations can be made to that campaign.
 
-## Remix Testing Guide
+## Run Locally
+
+From the `frontend` folder:
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite, usually:
+
+```text
+http://localhost:5173
+```
+
+The frontend uses the contract addresses and ABIs in `frontend/src/contracts/`. If the contracts are redeployed, update those JSON files before running the app.
+
+<details>
+<summary>Deployment and Remix Testing Guide</summary>
+
+## Deployment and Remix Testing Guide
 
 ### 1. Compile
 
@@ -326,3 +367,5 @@ status: 4
 escrow balance: 0
 isReleased: true
 ```
+
+</details>
