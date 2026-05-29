@@ -6,6 +6,10 @@ The public version of the application is deployed at:
 
 https://jairobuifranco.github.io/Donation-On-Chain/
 
+GitHub repository:
+
+[Jairobuifranco/Donation-On-Chain.git](https://github.com/Jairobuifranco/Donation-On-Chain.git)
+
 To use the deployed application, connect MetaMask to the Sepolia test network and use Sepolia test ETH.
 
 This project was developed for IFB452 by Group 44. The development work for the whole project was divided equally between my partner and I.
